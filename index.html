@@ -453,9 +453,25 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
   }
+
+  /* Loader */
+  #loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease;}
+  .scissors{width:60px;height:60px;position:relative;}
+  .blade{width:60px;height:6px;background:var(--gold);position:absolute;top:27px;transform-origin:10px 3px;border-radius:3px;}
+  .blade-top{transform:rotate(-20deg);animation:openCloseTop 1.5s infinite ease-in-out;}
+  .blade-bottom{transform:rotate(20deg);animation:openCloseBottom 1.5s infinite ease-in-out;}
+  @keyframes openCloseTop{0%,100%{transform:rotate(-20deg);}50%{transform:rotate(-5deg);}}
+  @keyframes openCloseBottom{0%,100%{transform:rotate(20deg);}50%{transform:rotate(5deg);}}
 </style>
 </head>
 <body>
+
+<div id="loader">
+  <div class="scissors">
+    <div class="blade blade-top"></div>
+    <div class="blade blade-bottom"></div>
+  </div>
+</div>
 
 <div class="card">
 
@@ -550,6 +566,13 @@
 
 <script>
 (function(){
+  // ---- Preloader ----
+  window.addEventListener('load', function() {
+    var loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    setTimeout(function() { loader.style.display = 'none'; }, 500);
+  });
+
   // ---- vCard download ----
   document.getElementById('saveContact').addEventListener('click', function(){
     var vcard = [
