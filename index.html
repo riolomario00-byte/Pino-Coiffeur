@@ -118,8 +118,6 @@
     position:relative;
     z-index:1;
     border:2px solid rgba(200, 160, 90, 0.4);
-    loading:lazy;
-    decoding:async;
   }
 
   /* ---------- Name / role ---------- */
@@ -465,7 +463,7 @@
 <div class="card">
 
   <div class="medallion-wrap">
-    <div class="medallion"><img class="medallion-img" src="pino.jpg" alt="Pino Coiffeur" width="132" height="132"></div>
+    <div class="medallion"><img class="medallion-img" src="pino.jpg" alt="Pino Coiffeur" width="132" height="132" loading="lazy" decoding="async"></div>
   </div>
 
   <div class="identity">
@@ -483,7 +481,7 @@
       Aggiungi ai contatti
     </button>
     <button class="btn btn-square btn-qr" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel" aria-label="Mostra QR code">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" wid[...]</svg>
       <span class="btn-qr-label">QR</span>
     </button>
   </div>
@@ -492,7 +490,7 @@
     <div class="qr-inner">
       <p>Inquadra o condividi</p>
       <div id="qrcode" aria-label="QR code della pagina">
-        <img src="qr-code.png" alt="QR Code" width="168" height="168" style="display:block;border-radius:6px;">
+        <img src="qr-code-3.png" alt="QR Code" width="168" height="168" loading="lazy" decoding="async" style="display:block;border-radius:6px;">
       </div>
       <button type="button" class="copy-row" id="copyLink" aria-label="Copia il link della pagina">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/></svg>
@@ -503,13 +501,13 @@
 
   <div class="socials">
     <a class="social" id="waSocial" href="https://wa.me/393394583024?text=Ciao%20Pino!%20Vorrei%20prenotare%20un%20appuntamento." target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.415 14.382C17.118 14.233 15.657 13.515 15.385 13.415C15.112 13.316 14.914 13.267 14.715 13.565C14.518 13.862 13.948 14.531 13.775 14.729C13.602 14.928 13.428 14.952 13.131 14.804C..."/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.415 14.382C17.118 14.233 15.657 13.515 15.385 13.415C15.112 13.316 14.914 13.2[...]"/></svg>
     </a>
     <a class="social" href="https://www.instagram.com/_pinocoiffeur_?igsh=eXZqMXZhemh2dXVi" target="_blank" rel="noopener" aria-label="Instagram Pino Coiffeur">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/></svg>
     </a>
     <a class="social" href="https://www.facebook.com/share/1NqxHPWbj3/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook Pino Coiffeur">
-      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.79..."/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.79[...]"/></svg>
     </a>
   </div>
 
@@ -547,7 +545,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg>
       </div>
       <div class="txt"><small>Cropani Marina</small>339 458 3024</div>
-      <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+      <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></s[...]>
     </a>
   </div>
 
