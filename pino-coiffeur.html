@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14110d">
+<title>Pino Coiffeur — Parrucchiere</title>
+<meta name="description" content="Pino Coiffeur: taglio classico e stile moderno a Cropani Marina e Scandale. Salva il contatto, scrivi su WhatsApp o vieni a trovarci.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14110d;
+    --surface:#1e1811;
+    --surface-2:#251e15;
+    --gold:#c8a05a;
+    --gold-soft:#a9834a;
+    --cream:#f5efe4;
+    --muted:#a89b83;
+    --hair:rgba(200,160,90,.18);
+    --radius:20px;
+    --safe-top:env(safe-area-inset-top,0);
+    --safe-bot:env(safe-area-inset-bottom,0);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth;}
+
+  ::selection{background:var(--gold);color:#1a1409;}
+
+  body{
+    background:
+      radial-gradient(120% 60% at 50% -10%, #241c13 0%, var(--bg) 55%),
+      var(--bg);
+    color:var(--cream);
+    font-family:'Manrope',sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:calc(48px + var(--safe-top)) 18px calc(80px + var(--safe-bot));
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .card{
+    width:100%;
+    max-width:420px;
+    animation:fadeUp .5s ease both;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(8px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* ---------- Avatar / medallion ---------- */
+  .medallion-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .medallion-wrap::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:340px;
+    height:340px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(closest-side, rgba(200,160,90,.18), rgba(200,160,90,.06) 55%, transparent 75%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .medallion{
+    position:relative;
+    z-index:1;
+    width:132px;
+    height:132px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(155deg,#2a2116,#181209);
+  }
+  .medallion::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:6px solid var(--gold);
+  }
+  .medallion::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    box-shadow:0 12px 30px -10px rgba(200,160,90,.35);
+  }
+  .medallion span{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:44px;
+    letter-spacing:1px;
+    color:var(--gold);
+    position:relative;
+    z-index:2;
+  }
+  .medallion-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+    border-radius:50%;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- Name / role ---------- */
+  .identity{
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .identity h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:38px;
+    letter-spacing:.3px;
+    color:var(--cream);
+    line-height:1.1;
+  }
+  .identity .role{
+    margin-top:8px;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:18px 0 20px;
+  }
+  .divider span{
+    height:1px;
+    width:34px;
+    background:linear-gradient(90deg,transparent,var(--gold-soft));
+  }
+  .divider span.right{
+    background:linear-gradient(90deg,var(--gold-soft),transparent);
+  }
+  .divider i{
+    width:5px;height:5px;border-radius:50%;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  .tagline{
+    text-align:center;
+    font-size:14.5px;
+    line-height:1.65;
+    color:var(--muted);
+    padding:0 12px;
+    margin-bottom:28px;
+  }
+
+  /* ---------- Actions ---------- */
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .btn{
+    border:none;
+    cursor:pointer;
+    font-family:'Manrope',sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    border-radius:999px;
+    transition:transform .15s ease, filter .15s ease, background .2s ease, border-color .15s ease;
+    text-decoration:none;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+  .btn-primary{
+    flex:1;
+    background:linear-gradient(180deg,#d8b678,var(--gold));
+    color:#1a1409;
+    font-weight:700;
+    font-size:14px;
+    padding:14px 16px;
+    letter-spacing:.3px;
+  }
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-primary svg{width:17px;height:17px;stroke:#1a1409;}
+
+  .btn-square{
+    width:52px;
+    height:52px;
+    flex-shrink:0;
+    background:var(--surface);
+    border:1px solid var(--hair);
+    border-radius:15px;
+    color:var(--gold);
+  }
+  .btn-square svg{width:20px;height:20px;}
+  .btn-square:hover{background:var(--surface-2);}
+
+  .btn-qr{
+    width:72px;
+    height:52px;
+    padding:6px 8px;
+    flex-direction:column;
+    gap:2px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .btn-qr svg{width:18px;height:18px;transition:transform .2s ease;}
+  .btn-qr-label{display:block;line-height:1;}
+  .btn-qr[aria-expanded="true"]{background:var(--surface-2);border-color:var(--gold-soft);}
+  .btn-qr[aria-expanded="true"] svg{transform:scale(.92);}
+
+  /* ---------- QR panel ---------- */
+  .qr-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease, opacity .3s ease, margin .35s ease;
+    opacity:0;
+    margin-bottom:0;
+  }
+  .qr-panel.open{
+    max-height:380px;
+    opacity:1;
+    margin-bottom:20px;
+  }
+  .qr-inner{
+    background:var(--surface);
+    border:1px solid var(--hair);
+    border-radius:var(--radius);
+    padding:22px;
+    text-align:center;
+  }
+  .qr-inner p{
+    font-size:12px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:14px;
+  }
+  #qrcode{
+    display:flex;
+    justify-content:center;
+    margin:0 auto 14px;
+    background:var(--cream);
+    padding:12px;
+    border-radius:12px;
+    width:fit-content;
+  }
+  #qrcode img,#qrcode canvas{display:block;border-radius:6px;}
+  .copy-row{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    justify-content:center;
+    font-size:12.5px;
+    color:var(--gold);
+    cursor:pointer;
+    font-weight:600;
+    background:none;
+    border:none;
+    font-family:inherit;
+    padding:6px 10px;
+    border-radius:8px;
+    transition:background .15s ease;
+  }
+  .copy-row:hover{background:var(--surface-2);}
+  .copy-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .copy-row svg{width:14px;height:14px;}
+
+  /* ---------- Socials ---------- */
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .social{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:var(--surface);
+    border:1px solid var(--hair);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    text-decoration:none;
+    transition:background .2s ease, transform .15s ease, border-color .15s ease;
+  }
+  .social:hover{background:var(--surface-2);transform:translateY(-2px);border-color:var(--gold-soft);}
+  .social:active{transform:translateY(0) scale(.96);}
+  .social:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .social svg{width:20px;height:20px;}
+
+  /* ---------- Section label ---------- */
+  .section-label{
+    font-size:11.5px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-bottom:14px;
+    padding-left:2px;
+  }
+
+  /* ---------- Salon cards ---------- */
+  .salons{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:30px;
+  }
+  .salon{
+    background:var(--surface);
+    border:1px solid var(--hair);
+    border-radius:16px;
+    padding:16px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .salon:hover{background:var(--surface-2);border-color:var(--gold-soft);}
+  .salon-top{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    margin-bottom:12px;
+  }
+  .salon-icon{
+    width:34px;height:34px;
+    border-radius:50%;
+    background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+    flex-shrink:0;
+  }
+  .salon-icon svg{width:16px;height:16px;}
+  .salon-text{flex:1;min-width:0;}
+  .salon-text .town{
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--cream);
+  }
+  .salon-text .addr{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:2px;
+  }
+  .salon-actions{
+    display:flex;
+    gap:8px;
+    padding-left:46px;
+    flex-wrap:wrap;
+  }
+  .salon-actions a{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.4px;
+    color:var(--gold);
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:10px;
+    background:transparent;
+    border:1px solid var(--hair);
+    transition:background .15s ease, border-color .15s ease;
+    min-height:36px;
+  }
+  .salon-actions a:hover{background:var(--surface-2);border-color:var(--gold-soft);}
+  .salon-actions a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .salon-actions a svg{width:13px;height:13px;transition:transform .15s ease;}
+  .salon-actions a:hover svg{transform:translateX(2px);}
+
+  /* ---------- Contact list ---------- */
+  .contacts{
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--hair);
+    border-radius:16px;
+    overflow:hidden;
+    background:var(--surface);
+  }
+  .contact-row{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:15px 16px;
+    text-decoration:none;
+    color:var(--cream);
+    border-bottom:1px solid var(--hair);
+    transition:background .15s ease;
+    min-height:48px;
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row:hover{background:var(--surface-2);}
+  .contact-row:active{background:var(--surface-2);}
+  .contact-row:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+  .contact-row .ic{
+    width:32px;height:32px;
+    border-radius:50%;
+    background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+    flex-shrink:0;
+  }
+  .contact-row .ic svg{width:15px;height:15px;}
+  .contact-row .txt{font-size:14px;font-weight:500;flex:1;}
+  .contact-row .txt small{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .contact-row .chev{
+    color:var(--muted);
+    flex-shrink:0;
+    transition:transform .15s ease, color .15s ease;
+  }
+  .contact-row:hover .chev{color:var(--gold);transform:translateX(2px);}
+  .contact-row .chev svg{width:14px;height:14px;}
+
+  /* ---------- Small screen ---------- */
+  @media (max-width:360px){
+    .identity h1{font-size:32px;}
+    .actions{flex-wrap:wrap;}
+    .btn-primary{flex-basis:100%;}
+    .btn-qr{flex:1;flex-direction:row;width:auto;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="medallion-wrap">
+    <div class="medallion"><img class="medallion-img" src="pino.jpg" alt="Pino Coiffeur" width="132" height="132" loading="lazy" decoding="async"></div>
+  </div>
+
+  <div class="identity">
+    <h1>Pino Coiffeur</h1>
+    <div class="role">Parrucchiere</div>
+  </div>
+
+  <div class="divider"><span></span><i></i><span class="right"></span></div>
+
+  <p class="tagline">Taglio classico e stile moderno, con la cura di sempre. Due saloni, un'unica passione per il dettaglio.</p>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="saveContact" type="button" aria-label="Salva Pino Coiffeur nei contatti">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+      Aggiungi ai contatti
+    </button>
+    <button class="btn btn-square btn-qr" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel" aria-label="Mostra QR code">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg>
+      <span class="btn-qr-label">QR</span>
+    </button>
+  </div>
+
+  <div class="qr-panel" id="qrPanel" aria-hidden="true">
+    <div class="qr-inner">
+      <p>Inquadra o condividi</p>
+      <div id="qrcode" aria-label="QR code della pagina"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABHsAAAR7CAIAAACfMz+5AAAABmJLR0QA/wD/AP+gvaeTAAAeJElEQVR4nOzbgW3jOhZAUXPhjlJAikodU1QKSE3cBjiDwPlXNJ1zClAeKFLWhZAx57wBAAAQ+N/uAQAAAF6W4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAIDKffcAjxtj7B4Bbrfbbc7ZXdw+X7Lm10vXPOWGXs9uWbIs8EPnHiLfuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKBy3z0A8JrmnN3FxxjdxU1+vXRZUueuOddz/OHXUlx/9fb29v7+vnsKfurz8/Pr62v3FADAmjeu1+CN6x8U11+9v7//+fNn9xT81MfHh/MPAE/LG9dr8Mb1D/6PCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAq990D/EZjjN0jPKM55+4RnpFluV56Qs+9oZZl6dzn+blrnkqX5dzdci5rvuT4X883LgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKjcdw8A/MsYY/cID5pz7h7hQedOnu6WdFns86VzlyV17j4Hfi3fuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKBy3z0A8C9zzu7iY4zu4qlzlyWd/FznLsu5h+hc5+4W4NfyjQsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAq990D/EZzzt0jwNnGGN3F0xN67uTnStf8XJZlySF6MW4oT8I3LgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACojDnn7hkeNMZIr//29vb+/p7+CS7w+fn59fWV/gmHaCldFpMvnbsVU/WPBa/E8V/yxsV3eOP6B8UFP+UQLZ3782/yF+PHgu9z/JccIp7EuT9z990DAP/iF3rJ5EsmXzL5kskBLuP/uAAA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AQAAVBQXAABARXEBAABUFBcAAEBlzDl3z/CgMUZ38XOXJWXNlywL/NC5hyidnCU3lO+zW5a8WlzPNy4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACo3HcP8Lg5Z3fxMUZ3cZas+YtJb6jj/2LSG8rSuYfo3BN67pqnzl2Wcyfner5xAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQOW+e4DHjTG6i885u4ufOzlL6Q1NmXzp3OPP0rm7JXXuspx7iM6dnCWH6HrnPnJ94wIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAIDKffcAj5tzdhcfY3QXTyc/V7rmKTf0xZx7/M89RPAknNDrnbssdsuSl6Il37gAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgMuacu2eA2+12G2N0F7fPl9I1T7mh13NCr2fNr+ep+GIcoiX7/Hq+cQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBlzDl3z/CgMcbuER507pqfy25ZSpfFPr+eG3o9a75kWfi+c3+gz+XV4nq+cQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEDlvnuAJzXn3D3CrzPG6C6e3tB0csuy5IQuuaFL6eSpc9ecF2MrLp37bOF6vnEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABAZcw5d8/AMcYY3cXTrZhOzpJny9K5hyh17rKY/HqWhd/APl8692fONy4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACo3HcP8KTGGLtH4L8059w9wq+THiI3FH7IIVpKl+Xcp+K5L0WWhSfhGxcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUxpxz9wwPGmN0Fz93WVLpmrNkKy7ZikvpbrHmS07o9WxFnsS5x98r9PV84wIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAIDKmHPungH4qzFGd/H0+J87OUvpDT3XuYco5YQueSpezyHiSfjGBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAAJX77gEeN8bYPQLcbrfbnHP3CA9KD9G5y3IuNxR+yKvFkmfL0rmTu6HX840LAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKvfdAwA8lzHG7hGeUbosc87u4udKlyW9oQ7Ri3FCl87d527o9RTXX729vb2/v++egp/6/Pz8+vraPQUAAL+U4vqr9/f3P3/+7J6Cn/r4+FBcAADs4v+4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKBy3z3AbzTG2D3CM5pz7h7hGaXLkm5F+/zFnHtC06147gk9d3KWrPn1HKKlcx9cKd+4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoHLfPQDwL2OM3SM8ozlnd3Frzvelu8U+Xzp3WdLJz3Xump87OdfzjQsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAq990DANvMOXeP8KAxRndxy/Jizr2h50rX3PG/nmfL9c7d5w7Rkm9cAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAUFFcAAAAFcUFAABQUVwAAAAVxQUAAFBRXAAAABXFBQAAULnvHuA3mnPuHoFjpLtljNFd/Nx9blmW0mVhKd0t527FlH2+dO4v0bk39NwT6jd0yTcuAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKgoLgAAgIriAgAAqCguAACAiuICAACoKC4AAICK4gIAAKjcdw/wvD4/Pz8+PnZPwU99fn7uHgEAgN9rzDl3z/CgMcbuEeB2u90coqV0Wc49/paF7zv32ZKyz6/nwXW9c4//ua8WKcUFP3XuT5HJl859tlgWvu/c3XLue8u5zr2hJl9yiK7n/7gAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgorgAAAAqigsAAKCiuAAAACqKCwAAoKK4AAAAKooLAACgMuacu2cAAAB4Tb5xAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAQAAVBQXAABARXEBAABUFBcAAEBFcQEAAFQUFwAAQEVxAfy//ToWAAAAABjkbz2KfWURAMDFuAAAAC7GBQAAcDEuAACAi3EBAABcjAsAAOBiXAAAABfjAgAAuBgXAADAxbgAAAAuxgUAAHAxLgAAgItxAQAAXIwLAADgYlwAAAAX4wIAALgYFwAAwMW4AAAALsYFAABwCXs8S3rKCDREAAAAAElFTkSuQmCC" alt="QR code Pino Coiffeur" width="168" height="168"></div>
+      <button type="button" class="copy-row" id="copyLink" aria-label="Copia il link della pagina">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="copyText">Copia link</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="socials">
+    <a class="social" id="waSocial" href="#" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.99c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+    <a class="social" href="https://www.instagram.com/_pinocoiffeur_?igsh=eXZqMXZhemh2dXVi" target="_blank" rel="noopener" aria-label="Instagram Pino Coiffeur">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+    </a>
+    <a class="social" href="https://www.facebook.com/share/1NqxHPWbj3/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook Pino Coiffeur">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 6.135 4.604 11.194 10.101 11.947Z"/></svg>
+    </a>
+  </div>
+
+  <div class="section-label">I nostri saloni</div>
+  <div class="salons">
+
+    <div class="salon">
+      <div class="salon-top">
+        <div class="salon-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="salon-text">
+          <div class="town">Cropani Marina (CZ)</div>
+          <div class="addr">Via Aurelia, 13</div>
+        </div>
+      </div>
+      <div class="salon-actions">
+        <a href="https://www.google.com/maps/search/?api=1&query=Via%20Aurelia%2013%2C%20Cropani%20Marina%20CZ%2C%20Italia" target="_blank" rel="noopener">
+          Indicazioni
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="tel:+393394583024">
+          Chiama
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="salon">
+      <div class="salon-top">
+        <div class="salon-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="salon-text">
+          <div class="town">Scandale (KR)</div>
+          <div class="addr">Via Nazionale, 17</div>
+        </div>
+      </div>
+      <div class="salon-actions">
+        <a href="https://www.google.com/maps/search/?api=1&query=Via%20Nazionale%2017%2C%20Scandale%20KR%2C%20Italia" target="_blank" rel="noopener">
+          Indicazioni
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="tel:+393313583158">
+          Chiama
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label">Contatti</div>
+  <div class="contacts">
+    <a class="contact-row" href="tel:+393394583024">
+      <div class="ic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="txt"><small>Telefono</small>339 458 3024</div>
+      <span class="chev" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
+    </a>
+    <a class="contact-row" id="waContact" href="#" target="_blank" rel="noopener">
+      <div class="ic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.99c-.003 5.45-4.437 9.884-9.885 9.884zm8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </div>
+      <div class="txt"><small>WhatsApp</small>Prenota un appuntamento</div>
+      <span class="chev" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // ---- WhatsApp links ----
+  var WA_NUMBER = "393394583024";
+  var WA_MESSAGE = "Ciao Pino! Vorrei prenotare un appuntamento.";
+  var waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_MESSAGE);
+  var waSocial = document.getElementById('waSocial');
+  var waContact = document.getElementById('waContact');
+  if (waSocial) waSocial.href = waUrl;
+  if (waContact) waContact.href = waUrl;
+
+  // ---- vCard download ----
+  document.getElementById('saveContact').addEventListener('click', function(){
+    var vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:Coiffeur;Pino;;;",
+      "FN:Pino Coiffeur",
+      "ORG:Pino Coiffeur",
+      "TITLE:Parrucchiere",
+      "TEL;TYPE=CELL,VOICE:+393394583024",
+      "ADR;TYPE=WORK:;;Via Aurelia 13;Cropani Marina;CZ;;Italia",
+      "ADR;TYPE=WORK:;;Via Nazionale 17;Scandale;KR;;Italia",
+      "URL:https://www.instagram.com/_pinocoiffeur_",
+      "URL:https://www.facebook.com/share/1NqxHPWbj3/",
+      "END:VCARD"
+    ].join("\r\n");
+    var blob = new Blob([vcard], {type:"text/vcard;charset=utf-8"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = "pino-coiffeur.vcf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
+  });
+
+  // ---- QR toggle + generation ----
+  var qrToggle = document.getElementById('qrToggle');
+  var qrPanel = document.getElementById('qrPanel');
+
+  function setQrOpen(open){
+    qrPanel.classList.toggle('open', open);
+    qrToggle.setAttribute('aria-expanded', String(open));
+    qrPanel.setAttribute('aria-hidden', String(!open));
+  }
+
+  qrToggle.addEventListener('click', function(){
+    setQrOpen(qrPanel.getAttribute('aria-hidden') === 'true');
+  });
+
+  // ---- Copy link (with fallback for non-secure contexts) ----
+  var copyBtn = document.getElementById('copyLink');
+  var copyText = document.getElementById('copyText');
+  var copyTimer;
+
+  copyBtn.addEventListener('click', function(){
+    var url = window.location.href;
+    var done = function(){
+      var original = copyText.textContent;
+      copyText.textContent = "Link copiato ✓";
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(function(){ copyText.textContent = original; }, 1800);
+    };
+    var fail = function(){
+      copyText.textContent = "Copia non riuscita";
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(function(){ copyText.textContent = "Copia link"; }, 1800);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(done, fail);
+    } else {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '0';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy') ? done() : fail();
+        document.body.removeChild(ta);
+      } catch(e) { fail(); }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
