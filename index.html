@@ -453,9 +453,18 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
   }
+
+  /* Loader */
+  #loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease;}
+  .loader-logo{width:150px;animation:pulse 1.5s infinite alternate;}
+  @keyframes pulse{from{opacity:.5;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
 </style>
 </head>
 <body>
+
+<div id="loader">
+  <img src="logo-preloader.jpg" alt="Pino Coiffeur" class="loader-logo">
+</div>
 
 <div class="card">
 
@@ -550,6 +559,13 @@
 
 <script>
 (function(){
+  // ---- Preloader ----
+  window.addEventListener('load', function() {
+    var loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    setTimeout(function() { loader.style.display = 'none'; }, 500);
+  });
+
   // ---- vCard download ----
   document.getElementById('saveContact').addEventListener('click', function(){
     var vcard = [
